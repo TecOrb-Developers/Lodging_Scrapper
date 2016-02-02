@@ -7,7 +7,16 @@ module ApplicationHelper
 
 
 	def get_urls
-		urls = ["http://www.tripadvisor.com/Hotel_Review-g43666-d506106-Reviews-Barteau_House-Zumbrota_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43666-d95412-Reviews-Americas_Best_Value_Inn_Zumbrota-Zumbrota_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43230-d267935-Reviews-Willows_on_the_River-Lake_City_Minnesota.html"]#,"http://www.tripadvisor.com/Hotel_Review-g43230-d1013281-Reviews-John_Hall_s_Alaskan_Lodge-Lake_City_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43466-d1466518-Reviews-Hampton_Inn_Suites_Rochester_North-Rochester_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43466-d227677-Reviews-Comfort_Inn_Rochester-Rochester_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43665-d561185-Reviews-Burr_Oaks_B_B-Zumbro_Falls_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43230-d268394-Reviews-AmericInn_Lodge_Suites_Lake_City-Lake_City_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g143057-d122845-Reviews-Zion_Lodge-Zion_National_Park_Utah.html","http://www.tripadvisor.com/Hotel_Review-g143057-d1803805-Reviews-The_Center_for_True_North-Zion_National_Park_Utah.html"]#,"http://www.tripadvisor.com/Hotel_Review-g61001-d226531-Reviews-Quality_Inn_at_Zion_Park-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d99965-Reviews-Flanigan_s_Inn-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d99963-Reviews-Cliffrose_Lodge_Gardens-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d226532-Reviews-Canyon_Ranch_Motel-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d1130977-Reviews-Cable_Mountain_Lodge-Springdale_Utah.html"]#,"http://www.tripadvisor.com/Hotel_Review-g57778-d126039-Reviews-Shenandoah_Crossing-Gordonsville_Virginia.html","http://www.tripadvisor.com/Hotel_Review-g2101211-d673344-Reviews-BEST_WESTERN_PLUS_Crossroads_Inn_Suites-Zion_Crossroads_Virginia.html","http://www.tripadvisor.com/Hotel_Review-g58841-d110945-Reviews-Vintage_Valley_Inn-Zillah_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58773-d672614-Reviews-Travel_Inn-Sunnyside_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58773-d456329-Reviews-Rodeway_Inn_Sunnyside-Sunnyside_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58786-d665497-Reviews-Quality_Inn_Suites-Toppenish_Washington.html"]
+		CSV.open('tripadvisor.csv', 'r' ) do |writer|
+	  	@links=[]
+	  	@first = 0
+	  	writer.each do |row|
+	  		@links << row[0] if @first!=0
+	  		@first+=1
+	  	end
+		end
+		 #["http://www.tripadvisor.com/Hotel_Review-g43666-d506106-Reviews-Barteau_House-Zumbrota_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43666-d95412-Reviews-Americas_Best_Value_Inn_Zumbrota-Zumbrota_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43230-d267935-Reviews-Willows_on_the_River-Lake_City_Minnesota.html"]#,"http://www.tripadvisor.com/Hotel_Review-g43230-d1013281-Reviews-John_Hall_s_Alaskan_Lodge-Lake_City_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43466-d1466518-Reviews-Hampton_Inn_Suites_Rochester_North-Rochester_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43466-d227677-Reviews-Comfort_Inn_Rochester-Rochester_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43665-d561185-Reviews-Burr_Oaks_B_B-Zumbro_Falls_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g43230-d268394-Reviews-AmericInn_Lodge_Suites_Lake_City-Lake_City_Minnesota.html","http://www.tripadvisor.com/Hotel_Review-g143057-d122845-Reviews-Zion_Lodge-Zion_National_Park_Utah.html","http://www.tripadvisor.com/Hotel_Review-g143057-d1803805-Reviews-The_Center_for_True_North-Zion_National_Park_Utah.html"]#,"http://www.tripadvisor.com/Hotel_Review-g61001-d226531-Reviews-Quality_Inn_at_Zion_Park-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d99965-Reviews-Flanigan_s_Inn-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d99963-Reviews-Cliffrose_Lodge_Gardens-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d226532-Reviews-Canyon_Ranch_Motel-Springdale_Utah.html","http://www.tripadvisor.com/Hotel_Review-g61001-d1130977-Reviews-Cable_Mountain_Lodge-Springdale_Utah.html"]#,"http://www.tripadvisor.com/Hotel_Review-g57778-d126039-Reviews-Shenandoah_Crossing-Gordonsville_Virginia.html","http://www.tripadvisor.com/Hotel_Review-g2101211-d673344-Reviews-BEST_WESTERN_PLUS_Crossroads_Inn_Suites-Zion_Crossroads_Virginia.html","http://www.tripadvisor.com/Hotel_Review-g58841-d110945-Reviews-Vintage_Valley_Inn-Zillah_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58773-d672614-Reviews-Travel_Inn-Sunnyside_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58773-d456329-Reviews-Rodeway_Inn_Sunnyside-Sunnyside_Washington.html","http://www.tripadvisor.com/Hotel_Review-g58786-d665497-Reviews-Quality_Inn_Suites-Toppenish_Washington.html"]
+		@links
 	end
 
 	def invalid_img_urls
@@ -124,6 +133,7 @@ module ApplicationHelper
 
 			@all_records << lodging 
 			p "----------------#{@c+=1}"
+			sleep [1,2,3].sample
 		end
 		@all_records
 	end
