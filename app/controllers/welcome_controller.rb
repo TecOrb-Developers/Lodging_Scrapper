@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
 	 #      headers['Content-Type'] ||= 'text/csv'
 	 #    end
   # 	end
-	  
+	  @test = Test.first
   end
 
   def new

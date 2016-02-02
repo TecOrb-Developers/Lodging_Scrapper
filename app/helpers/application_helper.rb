@@ -28,7 +28,7 @@ module ApplicationHelper
 		@all_records = []
 		@invalid_images = invalid_img_urls
 		@c=0
-
+		Test.destroy_all
 		urls.each do |url|
 			lodging={}
 			doc = Nokogiri::HTML(open(url))
@@ -133,6 +133,13 @@ module ApplicationHelper
 
 			@all_records << lodging 
 			p "----------------#{@c+=1}"
+			if @c==1
+				@t= Test.create!(:total=>@c) 
+				p "---db--#{@t.inspect}"
+			else
+			 @up=	Test.first.update_attributes!(:total=>@c)
+				p "---db- up -#{@up.inspect}"
+			end
 			sleep [1,2,3].sample
 		end
 		@all_records

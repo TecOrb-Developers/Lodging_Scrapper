@@ -2,4 +2,6 @@
 
 <%#= link_to 'Download CSV list', root_path(format: :csv) %>
 
-<%= link_to 'new CSV ', new_path %>
+<%= link_to 'new CSV ', new_path %> 
+
+<br><br> ... <%= @test.present? ? "in progress...#{@test.total} created at #{@test.updated_at.strftime('%a, %d %b %Y %H:%M:%S')}" : "0" %> 
