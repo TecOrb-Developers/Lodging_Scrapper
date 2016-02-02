@@ -42,7 +42,7 @@ module ApplicationHelper
 			lodging["star_class"]  = doc.at_css('.stars').present? ? doc.at_css('.stars').text.split('star')[0] : "n/a"
 			lodging["price_range"]  = doc.at_css('.address :nth-child(3) span').present? ? doc.at_css('.address :nth-child(3) span').text : "n/a"
 			lodging["description"]  = doc.at_css('.tabs_descriptive_text').present? ? doc.at_css('.tabs_descriptive_text').text : "n/a"
-			lodging["rating"] = doc.at_css('.rating_rr .rating_rr_fill').present? doc.at_css('.rating_rr .rating_rr_fill')["content"] : "n/a"
+			lodging["rating"] = doc.at_css('.rating_rr .rating_rr_fill').present? ? doc.at_css('.rating_rr .rating_rr_fill')["content"] : "n/a"
 			lodging["total_reviews"]= doc.at_css('.more').present? ? doc.at_css('.more').text.split(" ")[0] : "n/a"
 			
 			@traveller_rating=[]
