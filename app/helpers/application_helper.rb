@@ -23,7 +23,7 @@ module ApplicationHelper
 	end
 
 	def invalid_urls
-		urls = ["link","http://www.tripadvisor.com/Hotel_Review-g32032-d73309-Reviews-The_Red_Raven_Inn-Yellville_Arkansas.html","http://www.tripadvisor.com/Hotel_Review-g54046-d270519-Reviews-Budget_Host_Spirit_of_76_Motel-York_Pennsylvania.html","http://www.tripadvisor.com/Hotel_Review-g56926-d1646454-Reviews-White_Top_Motel-Yorktown_Texas.html"]
+		urls = ["link","https://www.tripadvisor.in/Hotels-g38803-Iola_Kansas-Hotels.html","http://www.tripadvisor.com/Hotel_Review-g32032-d73309-Reviews-The_Red_Raven_Inn-Yellville_Arkansas.html","http://www.tripadvisor.com/Hotel_Review-g54046-d270519-Reviews-Budget_Host_Spirit_of_76_Motel-York_Pennsylvania.html","http://www.tripadvisor.com/Hotel_Review-g56926-d1646454-Reviews-White_Top_Motel-Yorktown_Texas.html"]
 	end
 
 	def scrap_data
