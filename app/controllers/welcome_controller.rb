@@ -8,12 +8,13 @@ class WelcomeController < ApplicationController
 	 #      headers['Content-Type'] ||= 'text/csv'
 	 #    end
   # 	end
-	  @test = Test.first
+	  @tests = Scrape.all.order(id: "DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
 
   	 ScrapWorker.perform_async
+  	 redirect_to :back
 		# headers = ["name","rating","street address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews"] 
 
   # 	CSV.open('file.csv', 'w' ) do |writer|
