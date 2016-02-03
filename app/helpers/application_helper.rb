@@ -37,6 +37,7 @@ module ApplicationHelper
 			if( !@url.present? and !@invalid_urls.include?(url))
 				lodging={}
 				p "--------------#{url}"
+				begin
 				doc = Nokogiri::HTML(open(url))
 				lodging["link"]=url
 				lodging["name"]  = doc.at_css("#HEADING").text
@@ -141,6 +142,9 @@ module ApplicationHelper
 				if @data
 					@all_records << lodging 
 					p "----------------#{@c+=1}-------------db id #{@data.id}-----"
+				end
+				rescue
+					p "xxxxxxxxxx Exception in xxxxx  #{url} "
 				end
 				sleep [1,2,3].sample
 			end
