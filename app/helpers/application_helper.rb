@@ -138,8 +138,10 @@ module ApplicationHelper
 				lodging["reviews"] = @user_reviews
 
 				@data = Scrape.create(name: lodging["name"],link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"],total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos: lodging["photos"],reviews: lodging["reviews"])
-				@all_records << lodging 
-				p "----------------#{@c+=1}-------------db id #{@data.id}-----"
+				if @data
+					@all_records << lodging 
+					p "----------------#{@c+=1}-------------db id #{@data.id}-----"
+				end
 				sleep [1,2,3].sample
 			end
 		end
