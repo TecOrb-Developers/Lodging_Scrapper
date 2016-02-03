@@ -23,14 +23,19 @@ module ApplicationHelper
 		urls = ["pencil.png","maps.google.com","no_user_photo-v1.gif","rev_06.png","lvl_06.png","diamond-debutante.jpg","Visitor.png","Appreciated.png","gray_flag.png",".gif"]
 	end
 
+	def invalid_urls
+		urls = ["link","http://www.tripadvisor.com/Hotel_Review-g54046-d270519-Reviews-Budget_Host_Spirit_of_76_Motel-York_Pennsylvania.html","http://www.tripadvisor.com/Hotel_Review-g56926-d1646454-Reviews-White_Top_Motel-Yorktown_Texas.html"]
+	end
+
 	def scrap_data
 		urls = get_urls
 		@all_records = []
 		@invalid_images = invalid_img_urls
+		@invalid_urls = invalid_urls
 		@c=0
 		urls.each do |url|
 			@url = Scrape.where(:link=>url).first
-			if( !@url.present? and url!="link")
+			if( !@url.present? and !@invalid_urls.include?(url))
 				lodging={}
 				p "--------------#{url}"
 				doc = Nokogiri::HTML(open(url))
@@ -135,7 +140,7 @@ module ApplicationHelper
 
 				@data = Scrape.create(name: lodging["name"],link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"],total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos: lodging["photos"],reviews: lodging["reviews"])
 				@all_records << lodging 
-				p "----------------#{@c+=1}"
+				p "----------------#{@c+=1}-------------db id #{@data.id}-----"
 				sleep [1,2,3].sample
 			end
 		end
