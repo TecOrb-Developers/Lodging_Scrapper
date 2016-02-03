@@ -11,7 +11,7 @@ module ApplicationHelper
 	  	@links=[]
 	  	@first = 0
 	  	writer.each do |row|
-	  		@links << row[0] if (@first>=200 and @first<=220)
+	  		@links << row[0] #if (@first>=200 and @first<=220)
 	  		@first+=1
 	  	end
 		end
