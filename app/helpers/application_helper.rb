@@ -11,7 +11,7 @@ module ApplicationHelper
 	  	@links=[]
 	  	@first = 0
 	  	writer.each do |row|
-	  		@links << row[0] #if (@first>=200 and @first<=220)
+	  		@links << row[0] 
 	  		@first+=1
 	  	end
 		end
@@ -29,9 +29,10 @@ module ApplicationHelper
 		@invalid_images = invalid_img_urls
 		@c=0
 		urls.each do |url|
-			@url = Scrape.find_by_link(url)
-			if !@url
+			@url = Scrape.where(:link=>url).first
+			if( !@url.present? and url!="link")
 				lodging={}
+				p "--------------#{url}"
 				doc = Nokogiri::HTML(open(url))
 				lodging["link"]=url
 				lodging["name"]  = doc.at_css("#HEADING").text

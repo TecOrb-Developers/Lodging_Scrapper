@@ -1,6 +1,7 @@
 class ScrapWorker
   include Sidekiq::Worker
   include ApplicationHelper
+
   def perform
   	scrap_data
   #   headers = ["name","link","rating","street address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews"] 
