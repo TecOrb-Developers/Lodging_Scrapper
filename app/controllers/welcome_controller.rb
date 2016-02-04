@@ -27,6 +27,7 @@ require 'csv'
 		@data.each do |record|
  			row = [record.link.strip,record.name.strip,record.rating.strip,record.s_address.strip,record.e_address.strip,record.city.strip,record.state.strip,record.pin.strip,record.star.strip,record.price.strip,record.total_reviews.strip,record.traveller_rating,record.description.strip,record.amenities,record.photos,record.reviews]
 			writer <<  row
+			p "--------------------------"
 		end
 	end
   end
