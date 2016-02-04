@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   get 'new'=>"welcome#new"
-
+  get 'generate_csv'=>"welcome#generate_csv"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
