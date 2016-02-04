@@ -11,38 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203072455) do
+ActiveRecord::Schema.define(version: 20160204085636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "accounts", force: :cascade do |t|
-    t.string   "ac_holder_name"
-    t.string   "bank_name"
-    t.string   "Ac_type"
-    t.string   "bank_country"
-    t.string   "aba_number"
-    t.string   "bank_address1"
-    t.string   "bank_address2"
-    t.string   "bank_city"
-    t.string   "bank_state"
-    t.string   "bank_zip"
-    t.string   "currency"
-    t.string   "ac_number"
-    t.string   "contact_name"
-    t.string   "ac_holder_add1"
-    t.string   "ac_holder_add2"
-    t.string   "ac_holder_city"
-    t.string   "ac_holder_country"
-    t.string   "ac_holder_state"
-    t.string   "ac_holder_postal_code"
-    t.string   "province"
-    t.integer  "user_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -886,7 +858,6 @@ ActiveRecord::Schema.define(version: 20160203072455) do
   add_index "video_equipements", ["av_id"], name: "index_video_equipements_on_av_id", using: :btree
   add_index "video_equipements", ["video_equipement_type_id"], name: "index_video_equipements_on_video_equipement_type_id", using: :btree
 
-  add_foreign_key "accounts", "users"
   add_foreign_key "arrangements", "arrangement_types"
   add_foreign_key "arrangements", "caterings"
   add_foreign_key "audio_equipements", "audio_equipement_types"
