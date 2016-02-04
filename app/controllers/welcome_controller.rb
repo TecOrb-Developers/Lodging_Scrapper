@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-
+require 'open-uri'
+require 'csv'
   def index
 	@tests = Scrape.all.order(id: "DESC").paginate(:page => params[:page], :per_page => 10)
 
