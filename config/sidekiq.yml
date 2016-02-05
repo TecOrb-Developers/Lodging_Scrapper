@@ -1,4 +1,4 @@
-concurrency: 5
+concurrency: 50
 development:
   pidfile: tmp/pids/sidekiq_development.pid
   logfile: log/sidekiq_development.log
