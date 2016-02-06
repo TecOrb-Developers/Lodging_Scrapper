@@ -147,6 +147,8 @@ module ApplicationHelper
 			if @data
 				@all_records << lodging 
 				p "----------------#{@c+=1}-------------db id #{@data.id}-----"
+			else
+				p "++++XXXXXXX++++++Dublicate is not saving++++XXXXXXXX"
 			end
 			rescue
 				if !InvalidUrl.exists?(:url=>url)
