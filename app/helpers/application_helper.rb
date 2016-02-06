@@ -32,9 +32,10 @@ module ApplicationHelper
 		@invalid_images = invalid_img_urls
 		@invalid_urls = invalid_urls
 		@c=0
+		urls -= @invalid_urls
 		urls.each do |url|
 			@url = Scrape.where(:link=>url).first
-			if( !@url.present? and !@invalid_urls.include?(url))
+			if !@url.present? 
 				lodging={}
 				p "--------------#{url}"
 				begin
