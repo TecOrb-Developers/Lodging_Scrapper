@@ -171,7 +171,7 @@ module ApplicationHelper
 				rooms  = doc.at_css(".tabs_num_rooms").text
 				 
 				if @data.update_attributes!(:rooms=>rooms)
-					p "@data.id-------rooms = #{rooms}"
+					p "--#{@data.id}-------rooms = #{rooms}"
 				else
 					p "xxx--------not updated------------#{@data.id}"
 				end
