@@ -162,7 +162,7 @@ module ApplicationHelper
 	end
 
 	def update_data
-		urls = Scrape.all.pluck(:link)
+		urls = Scrape.where("rooms == ?","").pluck(:link)
 		urls.each do |url|
 			lodging={}
 			@data = Scrape.find_by_link(url)
