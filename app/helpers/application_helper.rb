@@ -56,7 +56,7 @@ module ApplicationHelper
 			lodging["description"]  = doc.at_css('.tabs_descriptive_text').present? ? doc.at_css('.tabs_descriptive_text').text : "n/a"
 			lodging["rating"] = doc.at_css('.rating_rr .rating_rr_fill').present? ? doc.at_css('.rating_rr .rating_rr_fill')["content"] : "n/a"
 			lodging["total_reviews"]= doc.at_css('.more').present? ? doc.at_css('.more').text.split(" ")[0] : "n/a"
-			
+			lodging["rooms"]  = doc.at_css(".tabs_num_rooms").text
 			@traveller_rating=[]
 			@cat_count=0
 			doc.css('.row_fill').each do |w|
@@ -143,7 +143,7 @@ module ApplicationHelper
 			end
 			lodging["reviews"] = @user_reviews
 
-			@data = Scrape.create(name: lodging["name"].strip,link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"].present? ? lodging["price_range"].strip : lodging["price_range"] ,total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos: lodging["photos"],reviews: lodging["reviews"])
+			@data = Scrape.create(name: lodging["name"].strip,link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"].present? ? lodging["price_range"].strip : lodging["price_range"],rooms: lodging["rooms"] ,total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos: lodging["photos"],reviews: lodging["reviews"])
 			if @data.id != nil
 				@all_records << lodging 
 				p "----------------#{@c+=1}-------------db id #{@data.id}-----"

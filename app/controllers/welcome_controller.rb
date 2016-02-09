@@ -20,12 +20,12 @@ require 'csv'
 
   def generate_csv
   	@data = Scrape.all
-  	headers = ["link","name","rating","street_address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews"] 
+  	headers = ["link","name","rating","street_address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews","rooms"] 
 
   	CSV.open('file.csv', 'w' ) do |writer|
 		writer << headers
 		@data.each do |record|
- 			row = [record.link.strip,record.name.strip,record.rating.strip,record.s_address.strip,record.e_address.strip,record.city.strip,record.state.strip,record.pin.strip,record.star.strip,record.price.strip,record.total_reviews.strip,record.traveller_rating,record.description.strip,record.amenities,record.photos,record.reviews]
+ 			row = [record.link.strip,record.name.strip,record.rating.strip,record.s_address.strip,record.e_address.strip,record.city.strip,record.state.strip,record.pin.strip,record.star.strip,record.price.strip,record.total_reviews.strip,record.traveller_rating,record.description.strip,record.amenities,record.photos,record.reviews,record.rooms]
 			writer <<  row
 			p "--------------------------"
 		end
