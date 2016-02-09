@@ -160,4 +160,24 @@ module ApplicationHelper
 		end
 		@all_records
 	end
+
+	def update_data
+		urls = Scrape.all.pluck(:link)
+		urls.each do |url|
+			lodging={}
+			@data = Scrape.find_by_link(url)
+			begin
+				doc = Nokogiri::HTML(open(url))
+				rooms  = doc.at_css(".tabs_num_rooms").text
+				 
+				if @data.update_attributes!(:rooms=>rooms)
+					p "@data.id-------rooms = #{rooms}"
+				else
+					p "xxx--------not updated------------#{@data.id}"
+				end
+			rescue
+				p "XXXXXXXXX Exception XXXXXX #{url}"
+			end
+		end
+	end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160205115109) do
+ActiveRecord::Schema.define(version: 20160209141127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -518,6 +518,11 @@ ActiveRecord::Schema.define(version: 20160205115109) do
     t.string   "link"
     t.integer  "near_by_id"
     t.integer  "property_type_id"
+    t.string   "rating"
+    t.string   "total_reviews"
+    t.string   "traveller_rating",    default: [],              array: true
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "lodgings", ["near_by_id"], name: "index_lodgings_on_near_by_id", using: :btree
@@ -679,6 +684,19 @@ ActiveRecord::Schema.define(version: 20160205115109) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string   "by"
+    t.string   "rate"
+    t.string   "location"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "lodging_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "reviews", ["lodging_id"], name: "index_reviews_on_lodging_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "role"
     t.integer  "user_id"
@@ -708,6 +726,7 @@ ActiveRecord::Schema.define(version: 20160205115109) do
     t.text     "reviews"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "rooms"
   end
 
   create_table "service_details", force: :cascade do |t|
@@ -929,6 +948,7 @@ ActiveRecord::Schema.define(version: 20160205115109) do
   add_foreign_key "payments", "users"
   add_foreign_key "prices", "service_details"
   add_foreign_key "prices", "users"
+  add_foreign_key "reviews", "lodgings"
   add_foreign_key "roles", "users"
   add_foreign_key "service_details", "users"
   add_foreign_key "supplies", "events"
