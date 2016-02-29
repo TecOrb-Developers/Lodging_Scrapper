@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  
+  # root 'welcome#gsa_new'
+  post 'gsa_create'=>"welcome#gsa_create"
+
   root 'welcome#index'
   get 'new'=>"welcome#new"
   get 'generate_csv'=>"welcome#generate_csv"

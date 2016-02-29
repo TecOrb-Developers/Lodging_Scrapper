@@ -56,7 +56,7 @@ module ApplicationHelper
 			lodging["description"]  = doc.at_css('.tabs_descriptive_text').present? ? doc.at_css('.tabs_descriptive_text').text : "n/a"
 			lodging["rating"] = doc.at_css('.rating_rr .rating_rr_fill').present? ? doc.at_css('.rating_rr .rating_rr_fill')["content"] : "n/a"
 			lodging["total_reviews"]= doc.at_css('.more').present? ? doc.at_css('.more').text.split(" ")[0] : "n/a"
-			lodging["rooms"]  = doc.at_css(".tabs_num_rooms").text
+			lodging["rooms"]  = doc.at_css(".tabs_num_rooms").present? ? doc.at_css(".tabs_num_rooms").text : "n/a"
 			@traveller_rating=[]
 			@cat_count=0
 			doc.css('.row_fill').each do |w|
@@ -87,16 +87,19 @@ module ApplicationHelper
 				@photos<< p["data"] 
 			end
 			@photos.slice!(0)
-			@images =[]
+			@images_url =[]
+			@images_name=[]
 			@photos.first(5).each do |f|
 			 if !@invalid_images.any? {|ele| f.include?(ele) }
-			 	open("#{lodging["name"].parameterize("_")}-#{f.split('/').last}", 'wb') do |file|
+			 	open("scraped_images/#{lodging["name"].parameterize("_")}-#{f.split('/').last}", 'wb') do |file|
 				  file << open(f).read
 				end
-			 		@images << f
+			 		@images_url << f
+			 		@images_name << "#{lodging["name"].parameterize("_")}-#{f.split('/').last}"
 			 end
 			end
-			lodging["photos"] = @images
+			lodging["photos"] = @images_url
+			lodging["photos_name"]= @images_name
 			@amenities = []
 			doc.css(".property_tags li").each do |item|
 				@amenities << item.text.gsub("\n","")
@@ -143,17 +146,17 @@ module ApplicationHelper
 			end
 			lodging["reviews"] = @user_reviews
 
-			@data = Scrape.create(name: lodging["name"].strip,link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"].present? ? lodging["price_range"].strip : lodging["price_range"],rooms: lodging["rooms"] ,total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos: lodging["photos"],reviews: lodging["reviews"])
+			@data = Scrape.create(name: lodging["name"].strip,link: lodging["link"],rating: lodging["rating"],s_address: lodging["street_address"],e_address: lodging["extended_address"],city: lodging["city"],state: lodging["state"],pin: lodging["pin"],star: lodging["star_class"],price: lodging["price_range"].present? ? lodging["price_range"].strip : lodging["price_range"],rooms: lodging["rooms"] ,total_reviews: lodging["total_reviews"],traveller_rating: lodging["traveller_rating"],description: lodging["description"],amenities: lodging["amenities"],photos_name: lodging["photos_name"],photos: lodging["photos"],reviews: lodging["reviews"])
 			if @data.id != nil
 				@all_records << lodging 
 				p "----------------#{@c+=1}-------------db id #{@data.id}-----"
 			else
 				p "++++XXXXXXX++++++Dublicate is not saving++++XXXXXXXX"
 			end
-			rescue
+			rescue => e
 				if !InvalidUrl.exists?(:url=>url)
 					iu=InvalidUrl.create(:url=>url)
-					p "xxxxxxxxxx Exception in xxxxx  #{iu.url} "
+					p "xxxxxxx xxx Exception in xxxxx  #{iu.url} "
 				end
 			end
 			sleep [1,2,3].sample
@@ -162,7 +165,7 @@ module ApplicationHelper
 	end
 
 	def update_data
-		urls = Scrape.where("rooms == ?","").pluck(:link)
+		urls = Scrape.where("rooms = ?","").pluck(:link)
 		urls.each do |url|
 			lodging={}
 			@data = Scrape.find_by_link(url)

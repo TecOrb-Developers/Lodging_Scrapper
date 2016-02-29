@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
 require 'open-uri'
 require 'csv'
   def index
-	@tests = Scrape.all.order(id: "DESC").paginate(:page => params[:page], :per_page => 10)
+	 @tests = Scrape.all.order(id: "DESC").paginate(:page => params[:page], :per_page => 10)
 
   	# respond_to do |format|
 	  #   format.html
@@ -23,13 +23,21 @@ require 'csv'
   	headers = ["link","name","rating","street_address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews","rooms"] 
 
   	CSV.open('file.csv', 'w' ) do |writer|
-		writer << headers
-		@data.each do |record|
- 			row = [record.link.strip,record.name.strip,record.rating.strip,record.s_address.strip,record.e_address.strip,record.city.strip,record.state.strip,record.pin.strip,record.star.strip,record.price.strip,record.total_reviews.strip,record.traveller_rating,record.description.strip,record.amenities,record.photos,record.reviews,record.rooms]
-			writer <<  row
-			p "--------------------------"
-		end
-	end
+  		writer << headers
+  		@data.each do |record|
+   			row = [record.link.strip,record.name.strip,record.rating.strip,record.s_address.strip,record.e_address.strip,record.city.strip,record.state.strip,record.pin.strip,record.star.strip,record.price.strip,record.total_reviews.strip,record.traveller_rating,record.description.strip,record.amenities,record.photos,record.reviews,record.rooms]
+  			writer <<  row
+  			p "--------------------------"
+  		end
+  	end
+  end
+
+  def gsa_new
+    
+  end
+
+  def gsa_create
+    
   end
 
 end

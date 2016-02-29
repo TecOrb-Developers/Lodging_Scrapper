@@ -15,6 +15,7 @@ class CreateScrapes < ActiveRecord::Migration
       t.string :traveller_rating
       t.text :description
       t.text :amenities
+      t.string :photos_name, array: true, default: []
       t.text :photos
       t.text :reviews
 

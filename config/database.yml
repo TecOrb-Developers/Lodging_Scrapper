@@ -9,13 +9,13 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: hospitality_development
+  database: lodging_development
 
 test:
   <<: *defaults
-  database: hospitality_test
+  database: lodging_test
 
 
 production:
   <<: *defaults
-  database: hospitality_production
+  database: lodging_production

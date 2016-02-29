@@ -3,8 +3,8 @@ class ScrapWorker
   include ApplicationHelper
 
   def perform
-  	# scrap_data
-    update_data
+  	scrap_data
+    # update_data
     
   #   headers = ["name","link","rating","street address","extended_address","city","state","pin","star","price","total_reviews","Traveller_rating","description","amenities","photos","reviews"] 
   # 	CSV.open('file.csv', 'w' ) do |writer|
