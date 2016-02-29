@@ -156,7 +156,7 @@ module ApplicationHelper
 			rescue => e
 				if !InvalidUrl.exists?(:url=>url)
 					iu=InvalidUrl.create(:url=>url)
-					p "xxxxxxx xxx Exception in xxxxx  #{iu.url} "
+					p "xxxxxxx #{e.backtrace} xxx Exception in xxxxx  #{iu.url} "
 				end
 			end
 			sleep [1,2,3].sample
