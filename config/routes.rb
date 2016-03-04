@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'new'=>"welcome#new"
   get 'generate_csv'=>"welcome#generate_csv"
+  get 'clean_price'=>"welcome#clean_price"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

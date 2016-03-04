@@ -1,0 +1,17 @@
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@scraps.each do |s|%>
+			<tr>
+				<td><%=s.name%></td>
+				<td><%=s.price%></td>
+				<td><%=s.rooms%></td>
+			</tr>
+		<%end%>
+	</tbody>
+</table>

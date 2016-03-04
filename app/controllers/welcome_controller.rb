@@ -40,4 +40,21 @@ require 'csv'
     
   end
 
+  def clean_price
+    @invalid=[]
+    Scrape.all.each do |s|
+      r=s.rooms
+      s.update_attributes(:rooms=>r.strip)
+      if s.price.present?
+        if s.price.split('$').length<=1
+          @invalid << s.id
+        end
+      else
+         @invalid << s.id
+      end
+    end
+    @scraps = Scrape.where("id IN (?)",@invalid)
+    @scraps.update_all(:price=>"n/a")
+  end
+
 end
