@@ -43,8 +43,6 @@ require 'csv'
   def clean_price
     @invalid=[]
     Scrape.all.each do |s|
-      r=s.rooms
-      s.update_attributes(:rooms=>r.strip)
       if s.price.present?
         if s.price.split('$').length<=1
           @invalid << s.id
